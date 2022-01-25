@@ -1,17 +1,17 @@
 ---
 home: true
-// heroImage: /favicon.ico
+heroImage: /logo.jpg
 heroAlt: Logo image
-heroText: Interview
-tagline: the website of Interview with VitePress
+heroText: Fractures_
+tagline: 个人学习记录
 actionText: Get Started
-actionLink: /html/
-features:
-  - title: Easy Setup
-    details: Minimal setup with markdown-centered project structure helps you focus on writing.
-  - title: Vue-Powered
-    details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-  - title: Performant
-    details: VitePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
-footer: MIT Licensed | Copyright © 2021-present CoolDream
+actionLink: /HTML/
+features: 
+  - title: 记录
+    details: 记录生活，分享快乐。
+  - title: 技术
+    details: 用心记录技术,走心分享,始于前端,不止于前端,励志成为一名优秀的全栈工程师。
+  - title: 面试
+    details: 面试不仅需要技术，同时，也需要一些心理博弈。
+footer: 似旅行，似流浪，亦是逃亡。
 ---

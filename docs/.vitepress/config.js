@@ -1,10 +1,10 @@
 module.exports = {
     // 网站标题
-    title: 'Interview',
+    title: 'Fractures_',
     // 网站描述
     description: 'Interview with vitePress',
     // 打包目录
-    dest: './dist',
+    dest: '/dist',
     head: [
         // 添加图标
         ['link', { rel: 'icon', href: '/favicon.ico' }]
@@ -24,9 +24,9 @@ module.exports = {
         smoothScroll: true,
         // 导航栏配置
         nav:[
-            {text: '我的个人网站', link: 'https://www.cooldream.fun/home' },
-            {text: '掘金', link: 'https://juejin.cn/user/1855631359481847/posts'},
-            {text: 'Github', link: 'https://github.com/Jack-Star-T'}
+            // {text: '我的个人网站', link: 'https://www.cooldream.fun/home' },
+            // {text: '掘金', link: 'https://juejin.cn/user/1855631359481847/posts'},
+            {text: 'Github', link: 'https://github.com/wanghui960122/my-blog'}
         ],
         sidebar: {
             '/': getSidebar()
