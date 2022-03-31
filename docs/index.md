@@ -5,7 +5,7 @@ heroAlt: Logo image
 heroText: Fractures_
 tagline: 个人学习记录
 actionText: Get Started
-actionLink: /HTML/
+actionLink: /Technology/HTML/
 features: 
   - title: 记录
     details: 记录生活，分享快乐。
