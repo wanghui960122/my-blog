@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "vitepress": "^0.21.6"
+  },
+  "dependencies": {
+    "vite": "^2.8.4"
   }
 }

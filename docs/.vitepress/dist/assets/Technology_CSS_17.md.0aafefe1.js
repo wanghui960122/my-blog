@@ -1,0 +1,5 @@
+import{_ as t,c as a,o as n,a as e,b as s}from"./app.5eb4599e.js";const v='{"title":"\u2F00\u4E2A\u6EE1\u5C4F\u54C1\u5B57\u5E03\u5C40\u5982\u4F55\u8BBE\u8BA1?","description":"","frontmatter":"title css \u2F00\u4E2A\u6EE1\u5C4F\u54C1\u5B57\u5E03\u5C40\u5982\u4F55\u8BBE\u8BA1?","headers":[],"relativePath":"Technology/CSS/17.md","lastUpdated":1648695887580}',o={},r=e("h1",{id:"\u2F00\u4E2A\u6EE1\u5C4F\u54C1\u5B57\u5E03\u5C40\u5982\u4F55\u8BBE\u8BA1",tabindex:"-1"},[s("\u2F00\u4E2A\u6EE1\u5C4F\u54C1\u5B57\u5E03\u5C40\u5982\u4F55\u8BBE\u8BA1? "),e("a",{class:"header-anchor",href:"#\u2F00\u4E2A\u6EE1\u5C4F\u54C1\u5B57\u5E03\u5C40\u5982\u4F55\u8BBE\u8BA1","aria-hidden":"true"},"#")],-1),c=e("div",{class:"language-"},[e("pre",null,[e("code",null,`\u7B80\u5355\u7684\u2F45\u5F0F\uFF1A
+ \u4E0A\u2FAF\u7684div\u5BBD100%\uFF0C
+ \u4E0B\u2FAF\u7684\u4E24\u4E2Adiv\u5206\u522B\u5BBD50%\uFF0C
+ \u7136\u540E\u2F64float\u6216\u8005inline\u4F7F\u5176\u4E0D\u6362\u2F8F\u5373\u53EF
+`)])],-1),d=[r,c];function i(l,_,h,p,f,u){return n(),a("div",null,d)}var x=t(o,[["render",i]]);export{v as __pageData,x as default};
