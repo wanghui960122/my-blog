@@ -1,0 +1,5 @@
+import{_ as e,c as a,o as n,d as s}from"./app.912614e9.js";const m='{"title":"IE \u548C DOM \u4E8B\u4EF6\u6D41\u7684\u533A\u522B","description":"","frontmatter":"title JS IE\u548CDOM\u4E8B\u4EF6\u6D41\u7684\u533A\u522B","headers":[],"relativePath":"Technology/JS/15.md","lastUpdated":1649156241730}',t={},o=s(`<h1 id="ie-\u548C-dom-\u4E8B\u4EF6\u6D41\u7684\u533A\u522B" tabindex="-1">IE \u548C DOM \u4E8B\u4EF6\u6D41\u7684\u533A\u522B <a class="header-anchor" href="#ie-\u548C-dom-\u4E8B\u4EF6\u6D41\u7684\u533A\u522B" aria-hidden="true">#</a></h1><div class="language-js"><pre><code><span class="token number">1.</span>\u6267\u2F8F\u987A\u5E8F\u4E0D\u2F00\u6837\u3001
+<span class="token number">2.</span>\u53C2\u6570\u4E0D\u2F00\u6837
+<span class="token number">3.</span>\u4E8B\u4EF6\u52A0\u4E0D\u52A0on
+<span class="token number">4</span><span class="token punctuation">.</span>this\u6307\u5411\u95EE\u9898
+</code></pre></div>`,2),c=[o];function r(_,d,p,i,l,h){return n(),a("div",null,c)}var f=e(t,[["render",r]]);export{m as __pageData,f as default};

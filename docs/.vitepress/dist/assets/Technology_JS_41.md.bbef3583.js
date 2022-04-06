@@ -1,0 +1,4 @@
+import{_ as a,c as e,o as t,d as s}from"./app.912614e9.js";const v='{"title":"Javascript \u5982\u4F55\u5B9E\u73B0\u7EE7\u627F\uFF1F","description":"","frontmatter":"title JS Javascript\u5982\u4F55\u5B9E\u73B0\u7EE7\u627F\uFF1F","headers":[],"relativePath":"Technology/JS/41.md","lastUpdated":1649159630768}',n={},r=s(`<h1 id="javascript-\u5982\u4F55\u5B9E\u73B0\u7EE7\u627F\uFF1F" tabindex="-1">Javascript \u5982\u4F55\u5B9E\u73B0\u7EE7\u627F\uFF1F <a class="header-anchor" href="#javascript-\u5982\u4F55\u5B9E\u73B0\u7EE7\u627F\uFF1F" aria-hidden="true">#</a></h1><div class="language-js"><pre><code><span class="token number">1.</span>\u6784\u9020\u7EE7\u627F\u6CD5
+<span class="token number">2.</span>\u539F\u578B\u7EE7\u627F\u6CD5
+<span class="token number">3.</span>\u5B9E\u4F8B\u7EE7\u627F\u6CD5
+</code></pre></div>`,2),c=[r];function o(_,i,p,d,l,h){return t(),e("div",null,c)}var m=a(n,[["render",o]]);export{v as __pageData,m as default};

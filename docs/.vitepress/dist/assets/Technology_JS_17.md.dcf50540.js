@@ -1,0 +1,11 @@
+import{_ as n,c as a,o as s,d as t}from"./app.912614e9.js";const m='{"title":"\u5982\u4F55\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1\u548C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A","description":"","frontmatter":"title JS \u5982\u4F55\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1\u548C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A","headers":[],"relativePath":"Technology/JS/17.md","lastUpdated":1649156303939}',o={},e=t(`<h1 id="\u5982\u4F55\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1\u548C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A" tabindex="-1">\u5982\u4F55\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1\u548C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A <a class="header-anchor" href="#\u5982\u4F55\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1\u548C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A" aria-hidden="true">#</a></h1><div class="language-js"><pre><code><span class="token comment">//\u963B\u2F4C\u4E8B\u4EF6\u5192\u6CE1</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> ev<span class="token punctuation">.</span>stopPropagation <span class="token operator">==</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//\u6807\u51C6\u7684</span>
+  ev<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  <span class="token comment">//\u2FAE\u6807\u51C6IE</span>
+  window<span class="token punctuation">.</span>event<span class="token punctuation">.</span>cancelBubble <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//\u963B\u2F4C\u4E8B\u4EF6\u9ED8\u8BA4\u2F8F\u4E3A</span>
+<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+</code></pre></div>`,2),p=[e];function c(l,u,i,r,k,d){return s(),a("div",null,p)}var f=n(o,[["render",c]]);export{m as __pageData,f as default};

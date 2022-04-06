@@ -1,2 +1,0 @@
-import{_ as t,c as a,o,a as e}from"./app.5eb4599e.js";const h='{"title":"","description":"","frontmatter":"title JS \u57FA\u7840","headers":[],"relativePath":"Technology/JS/index.md","lastUpdated":1644903582205}',s={},n=e("div",{class:"language-js"},[e("pre",null,[e("code",null,`vue3
-`)])],-1),c=[n];function r(d,l,i,_,p,u){return o(),a("div",null,c)}var m=t(s,[["render",r]]);export{h as __pageData,m as default};

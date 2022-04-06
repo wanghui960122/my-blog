@@ -1,0 +1,5 @@
+import{_ as e,c as a,o as t,d as n}from"./app.912614e9.js";const f='{"title":"\u4F60\u5982\u4F55\u4F18\u5316\u2F83\u2F30\u7684\u4EE3\u7801\uFF1F","description":"","frontmatter":"title JS \u4F60\u5982\u4F55\u4F18\u5316\u2F83\u2F30\u7684\u4EE3\u7801\uFF1F","headers":[],"relativePath":"Technology/JS/59.md","lastUpdated":1649160662292}',s={},o=n(`<h1 id="\u4F60\u5982\u4F55\u4F18\u5316\u2F83\u2F30\u7684\u4EE3\u7801\uFF1F" tabindex="-1">\u4F60\u5982\u4F55\u4F18\u5316\u2F83\u2F30\u7684\u4EE3\u7801\uFF1F <a class="header-anchor" href="#\u4F60\u5982\u4F55\u4F18\u5316\u2F83\u2F30\u7684\u4EE3\u7801\uFF1F" aria-hidden="true">#</a></h1><div class="language-js"><pre><code>\u4EE3\u7801\u91CD\u2F64
+\u907F\u514D\u5168\u5C40\u53D8\u91CF\uFF08\u547D\u540D\u7A7A\u95F4\uFF0C\u5C01\u95ED\u7A7A\u95F4\uFF0C\u6A21\u5757\u5316mvc<span class="token punctuation">.</span><span class="token punctuation">.</span>\uFF09
+\u62C6\u5206\u51FD\u6570\u907F\u514D\u51FD\u6570\u8FC7\u4E8E\u81C3\u80BF
+\u6CE8\u91CA
+</code></pre></div>`,2),c=[o];function _(r,d,i,p,l,h){return t(),a("div",null,c)}var m=e(s,[["render",_]]);export{f as __pageData,m as default};

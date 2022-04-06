@@ -1,6 +1,0 @@
-import{_ as n,c as s,o as a,d as t}from"./app.5eb4599e.js";const h='{"title":"\u5982\u4F55\u6D88\u9664transition\u95EA\u5C4F","description":"","frontmatter":"title css \u5982\u4F55\u6D88\u9664transition\u95EA\u5C4F","headers":[],"relativePath":"Technology/CSS/70.md","lastUpdated":1648715833526}',e={},o=t(`<h1 id="\u5982\u4F55\u6D88\u9664transition\u95EA\u5C4F" tabindex="-1">\u5982\u4F55\u6D88\u9664transition\u95EA\u5C4F <a class="header-anchor" href="#\u5982\u4F55\u6D88\u9664transition\u95EA\u5C4F" aria-hidden="true">#</a></h1><div class="language-css"><pre><code><span class="token selector">.css</span> <span class="token punctuation">{</span>
-        <span class="token property">-webkit-transform-style</span><span class="token punctuation">:</span> preserve-3d<span class="token punctuation">;</span>
-        <span class="token property">-webkit-backface-visibility</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
-        <span class="token property">-webkit-perspective</span><span class="token punctuation">:</span> 1000<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre></div>`,2),p=[o];function c(i,r,l,_,d,u){return a(),s("div",null,p)}var f=n(e,[["render",c]]);export{h as __pageData,f as default};

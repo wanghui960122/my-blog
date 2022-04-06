@@ -1,0 +1,4 @@
+import{_ as t,c as a,o as s,a as e,b as o}from"./app.912614e9.js";const f='{"title":"px\u548Cem\u7684\u533A\u522B","description":"","frontmatter":"title css px\u548Cem\u7684\u533A\u522B","headers":[],"relativePath":"Technology/CSS/40.md","lastUpdated":1649138781556}',n={},r=e("h1",{id:"px\u548Cem\u7684\u533A\u522B",tabindex:"-1"},[o("px\u548Cem\u7684\u533A\u522B "),e("a",{class:"header-anchor",href:"#px\u548Cem\u7684\u533A\u522B","aria-hidden":"true"},"#")],-1),c=e("div",{class:"language-"},[e("pre",null,[e("code",null,`px\u548Cem\u90FD\u662F\u2ED3\u5EA6\u5355\u4F4D\uFF0C\u533A\u522B\u662F\uFF1A
+px\u503C\u56FA\u5B9A\uFF0C\u5BB9\u6613\u8BA1\u7B97\u3002
+em\u503C\u4E0D\u56FA\u5B9A\uFF0C\u662F\u76F8\u5BF9\u5355\u4F4D\uFF0C\u5176\u76F8\u5BF9\u5E94\u2F57\u7EA7\u5143\u7D20\u7684\u5B57\u4F53\u2F24\u2F29\u4F1A\u8C03\u6574
+`)])],-1),d=[r,c];function p(i,l,_,m,h,x){return s(),a("div",null,d)}var g=t(n,[["render",p]]);export{f as __pageData,g as default};

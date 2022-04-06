@@ -1,0 +1,8 @@
+import{_ as t,c as a,o as s,d as n}from"./app.912614e9.js";const S='{"title":"CSS\u4F18\u5148\u7EA7\u7B97\u6CD5\u5982\u4F55\u8BA1\u7B97\uFF1F","description":"","frontmatter":"title css CSS\u4F18\u5148\u7EA7\u7B97\u6CD5\u5982\u4F55\u8BA1\u7B97\uFF1F","headers":[],"relativePath":"Technology/CSS/11.md","lastUpdated":1649138781533}',e={},o=n(`<h1 id="css\u4F18\u5148\u7EA7\u7B97\u6CD5\u5982\u4F55\u8BA1\u7B97\uFF1F" tabindex="-1">CSS\u4F18\u5148\u7EA7\u7B97\u6CD5\u5982\u4F55\u8BA1\u7B97\uFF1F <a class="header-anchor" href="#css\u4F18\u5148\u7EA7\u7B97\u6CD5\u5982\u4F55\u8BA1\u7B97\uFF1F" aria-hidden="true">#</a></h1><div class="language-css"><pre><code>* \u4F18\u5148\u7EA7\u5C31\u8FD1\u539F\u5219\uFF0C\u540C\u6743\u91CD\u60C5\u51B5\u4E0B\u6837\u5F0F\u5B9A\u4E49\u6700\u8FD1\u8005\u4E3A\u51C6<span class="token punctuation">;</span>
+* \u8F7D\u2F0A\u6837\u5F0F\u4EE5\u6700\u540E\u8F7D\u2F0A\u7684\u5B9A\u4F4D\u4E3A\u51C6<span class="token punctuation">;</span>
+
+<span class="token property">\u4F18\u5148\u7EA7\u4E3A</span><span class="token punctuation">:</span>
+    <span class="token property">\u540C\u6743\u91CD</span><span class="token punctuation">:</span> \u5185\u8054\u6837\u5F0F\u8868\uFF08\u6807\u7B7E\u5185\u90E8\uFF09&gt; \u5D4C\u2F0A\u6837\u5F0F\u8868\uFF08\u5F53\u524D\u2F42\u4EF6\u4E2D\uFF09&gt; \u5916\u90E8\u6837\u5F0F\u8868\uFF08\u5916\u90E8\u2F42\u4EF6\u4E2D\uFF09\u3002
+    <span class="token important">!important</span> &gt; id &gt; class &gt; tag
+    important \u2F50 \u5185\u8054\u4F18\u5148\u7EA7\u2FBC
+</code></pre></div>`,2),c=[o];function p(r,_,i,d,l,u){return s(),a("div",null,c)}var g=t(e,[["render",p]]);export{S as __pageData,g as default};

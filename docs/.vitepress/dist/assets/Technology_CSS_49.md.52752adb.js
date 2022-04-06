@@ -1,0 +1,20 @@
+import{_ as a,c as n,o as s,d as t}from"./app.912614e9.js";const _='{"title":"\u4ECB\u7ECD\u4E0B BFC \u53CA\u5176\u5E94\u2F64","description":"","frontmatter":"title css \u4ECB\u7ECD\u4E0B BFC \u53CA\u5176\u5E94\u2F64","headers":[],"relativePath":"Technology/CSS/49.md","lastUpdated":1649138781563}',p={},o=t(`<h1 id="\u4ECB\u7ECD\u4E0B-bfc-\u53CA\u5176\u5E94\u2F64" tabindex="-1">\u4ECB\u7ECD\u4E0B BFC \u53CA\u5176\u5E94\u2F64 <a class="header-anchor" href="#\u4ECB\u7ECD\u4E0B-bfc-\u53CA\u5176\u5E94\u2F64" aria-hidden="true">#</a></h1><ol><li>\u5185\u90E8box\u4F1A\u5728\u5782\u76F4\u2F45\u5411\uFF0C\u2F00\u4E2A\u63A5\u2F00\u4E2A\u5730\u653E\u7F6E\u3002\uFFFD Box\u5782\u76F4\u2F45\u5411\u7684\u8DDD\u79BB\u7531margin\u51B3\u5B9A\uFF0C\u5728\u2F00\u4E2ABFC\u4E2D\uFF0C\u4E24\u4E2A\u76F8\u90BB\u7684\u5757\u7EA7\u76D2\u2F26\u7684\u5782\u76F4\u5916\u8FB9\u8DDD\u4F1A\u4EA7\u2F63\u6298 \u53E0\u3002</li><li></li></ol><p>\u5728BFC\u4E2D\uFF0C\u6BCF\u2F00\u4E2A\u76D2\u2F26\u7684\u5DE6\u5916\u8FB9\u7F18\uFF08margin-left\uFF09\u4F1A\u89E6\u78B0\u5230\u5BB9\u5668\u7684\u5DE6\u8FB9\u7F18(border-left)\uFF08\u5BF9\u4E8E\u4ECE\u53F3 \u5230\u5DE6\u7684\u683C\u5F0F\u6765\u8BF4\uFF0C\u5219\u89E6\u78B0\u5230\u53F3\u8FB9\u7F18\uFF09 3. 4. \u5F62\u6210\u4E86BFC\u7684\u533A\u57DF\u4E0D\u4F1A\u4E0Efloat box\u91CD\u53E0 5. \u8BA1\u7B97BFC\u2FBC\u5EA6\u65F6\uFF0C\u6D6E\u52A8\u5143\u7D20\u4E5F\u53C2\u4E0E\u8BA1\u7B97 \u2F63\u6210BFC\u9664\u4E86 @webproblem \u7AE5\u978B\u6240\u8BF4\u7684\u8FD8\u6709\uFF1A\u2F8F\u5185\u5757\u5143\u7D20\u3001\u2F79\u683C\u5E03\u5C40\u3001contain\u503C\u4E3Alayout\u3001 content\u6216 strict\u7684\u5143\u7D20\u7B49\u3002</p><p>BFC\u4F5C\u2F64\uFF1A</p><ol><li>\u5229\u2F64\u7279\u60274\u53EF\u5B9E\u73B0\u5DE6\u56FE\u53F3\u2F42\u4E4B\u7C7B\u7684\u6548\u679C\uFF1A</li></ol><div class="language-html"><pre><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&#39;</span>image.png<span class="token punctuation">&#39;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>\u6211\u662F\u8D85\u2ED3\u7684\u2F42\u5B57<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+
+img {
+float:left
+}
+p {
+overflow:hidden
+}
+</code></pre></div><ol start="2"><li>\u5229\u2F64\u7279\u60275\u53EF\u4EE5\u89E3\u51B3\u6D6E\u52A8\u5143\u7D20\u9020\u6210\u7684\u2F57\u5143\u7D20\u2FBC\u5EA6\u584C\u9677\u95EE\u9898\uFF1A</li></ol><div class="language-html"><pre><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&#39;</span>parent<span class="token punctuation">&#39;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&#39;</span>float<span class="token punctuation">&#39;</span></span><span class="token punctuation">&gt;</span></span>\u6D6E\u52A8\u5143\u7D20<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+.parent {
+overflow:hidden;
+}
+.float {
+float:left;
+}
+</code></pre></div>`,8),e=[o];function l(c,i,u,r,k,d){return s(),n("div",null,e)}var f=a(p,[["render",l]]);export{_ as __pageData,f as default};
