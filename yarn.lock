@@ -94,6 +94,13 @@
 "@babel/parser@^7.16.4":
   "version" "7.16.12"
 
+"@babel/runtime@^7.17.8":
+  "integrity" "sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg=="
+  "resolved" "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.17.9.tgz"
+  "version" "7.17.9"
+  dependencies:
+    "regenerator-runtime" "^0.13.4"
+
 "@docsearch/css@^3.0.0-alpha.41", "@docsearch/css@3.0.0-alpha.42":
   "version" "3.0.0-alpha.42"
 
@@ -202,8 +209,18 @@
     "@algolia/requester-node-http" "4.12.0"
     "@algolia/transporter" "4.12.0"
 
+"complex.js@^2.1.0":
+  "integrity" "sha512-RdcrDz7YynXp/YXGwXIZ4MtmxXXniT5WmLFRX93cuXUX+0geWAqB8l1BoLXF+3BkzviVzHlpw27P9ow7MvlcmA=="
+  "resolved" "https://registry.npmmirror.com/complex.js/-/complex.js-2.1.0.tgz"
+  "version" "2.1.0"
+
 "csstype@^2.6.8":
   "version" "2.6.19"
+
+"decimal.js@^10.3.1":
+  "integrity" "sha512-V0pfhfr8suzyPGOx3nmq4aHqabehUZn6Ch9kyFpV79TGDTWFmHqUqXdabR7QHqxzrYolF4+tVmJhUG4OURg5dQ=="
+  "resolved" "https://registry.npmmirror.com/decimal.js/-/decimal.js-10.3.1.tgz"
+  "version" "10.3.1"
 
 "esbuild-darwin-64@0.14.29":
   "version" "0.14.29"
@@ -253,8 +270,18 @@
     "esbuild-windows-64" "0.14.29"
     "esbuild-windows-arm64" "0.14.29"
 
+"escape-latex@^1.2.0":
+  "integrity" "sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw=="
+  "resolved" "https://registry.npmmirror.com/escape-latex/-/escape-latex-1.2.0.tgz"
+  "version" "1.2.0"
+
 "estree-walker@^2.0.2":
   "version" "2.0.2"
+
+"fraction.js@^4.2.0":
+  "integrity" "sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA=="
+  "resolved" "https://registry.npmmirror.com/fraction.js/-/fraction.js-4.2.0.tgz"
+  "version" "4.2.0"
 
 "fsevents@~2.3.2":
   "version" "2.3.2"
@@ -272,10 +299,40 @@
   dependencies:
     "has" "^1.0.3"
 
+"javascript-natural-sort@^0.7.1":
+  "integrity" "sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw=="
+  "resolved" "https://registry.npmmirror.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz"
+  "version" "0.7.1"
+
+"lodash@^4.17.21":
+  "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+  "resolved" "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz"
+  "version" "4.17.21"
+
 "magic-string@^0.25.7":
   "version" "0.25.7"
   dependencies:
     "sourcemap-codec" "^1.4.4"
+
+"math@^0.0.3":
+  "integrity" "sha512-xyNJxsEwpYBabFmCgwg7TFRljf5oGgV2h1TqP0H9RnykScaSKgoVlBaEz+Gov8NOdxFagoTzRg1aEBfayi8qQQ=="
+  "resolved" "https://registry.npmmirror.com/math/-/math-0.0.3.tgz"
+  "version" "0.0.3"
+
+"mathjs@^10.4.2":
+  "integrity" "sha512-3yXxFBR0V2Ij+jk7LV5k15lb+yivRxYRzjmuDYB1+yUzM3x7/XXNjIUZlcyp6l96BUMsOWzgZfIeYxg/dzqxKw=="
+  "resolved" "https://registry.npmmirror.com/mathjs/-/mathjs-10.4.2.tgz"
+  "version" "10.4.2"
+  dependencies:
+    "@babel/runtime" "^7.17.8"
+    "complex.js" "^2.1.0"
+    "decimal.js" "^10.3.1"
+    "escape-latex" "^1.2.0"
+    "fraction.js" "^4.2.0"
+    "javascript-natural-sort" "^0.7.1"
+    "seedrandom" "^3.0.5"
+    "tiny-emitter" "^2.1.0"
+    "typed-function" "^2.1.0"
 
 "nanoid@^3.3.1":
   "version" "3.3.2"
@@ -299,6 +356,11 @@
 "prismjs@^1.25.0":
   "version" "1.26.0"
 
+"regenerator-runtime@^0.13.4":
+  "integrity" "sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA=="
+  "resolved" "https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz"
+  "version" "0.13.9"
+
 "resolve@^1.22.0":
   "version" "1.22.0"
   dependencies:
@@ -313,6 +375,11 @@
   optionalDependencies:
     "fsevents" "~2.3.2"
 
+"seedrandom@^3.0.5":
+  "integrity" "sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg=="
+  "resolved" "https://registry.npmmirror.com/seedrandom/-/seedrandom-3.0.5.tgz"
+  "version" "3.0.5"
+
 "source-map-js@^1.0.2":
   "version" "1.0.2"
 
@@ -324,6 +391,16 @@
 
 "supports-preserve-symlinks-flag@^1.0.0":
   "version" "1.0.0"
+
+"tiny-emitter@^2.1.0":
+  "integrity" "sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q=="
+  "resolved" "https://registry.npmmirror.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz"
+  "version" "2.1.0"
+
+"typed-function@^2.1.0":
+  "integrity" "sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ=="
+  "resolved" "https://registry.npmmirror.com/typed-function/-/typed-function-2.1.0.tgz"
+  "version" "2.1.0"
 
 "vite@^2.5.10", "vite@^2.7.12", "vite@^2.8.4":
   "version" "2.8.4"
