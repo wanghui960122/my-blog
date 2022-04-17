@@ -2220,3 +2220,1331 @@ watchFn(function () {
 
 proxyObj.name = "zs";
 ```
+
+## Promise 基本使用
+
+```js
+function foo() {
+  return new Promise((resolve, rejectt) => {
+    // resolve(1);
+    rejectt(2);
+  });
+}
+
+// .then()接收两个函数，第一个处理成功回调，第二个处理失败回调
+foo().then(
+  (res) => {
+    console.log(res); // 1
+  },
+  (err) => {
+    console.log(err);
+  }
+);
+
+// .catch()处理失败回调
+foo()
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+// .finally() 不论失败成功都会来到finally
+foo()
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    console.log("finally code execute");
+  });
+```
+
+## resolve 的参数
+
+```js
+function foo() {
+  return new Promise((resolve, reject) => {
+    // 传入普通值 pending -> resolve
+    // resolve(1);
+
+    // 传入一个Promise 由传入的这个Promise的状态决定
+    // resolve(
+    //   new Promise((resolve) => {
+    //     resolve(2);
+    //   })
+    // );
+
+    // 传入一个对象，并且这个对象有实现then方法(并且这个对象是实现了thenable接口)那么也会执行该then方法, 并且又该then方法决定后续状态
+    resolve({
+      then(resolve, reject) {
+        resolve(3);
+      },
+    });
+  });
+}
+
+foo()
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+## Promise.then() 方法
+
+```js
+// Promise有哪些对象方法
+// console.log(Object.getOwnPropertyDescriptors(Promise.prototype))
+
+const promise = new Promise((resolve, reject) => {
+  resolve("hahaha");
+});
+
+// 1.同一个Promise可以被多次调用then方法
+// 当我们的resolve方法被回调时, 所有的then方法传入的回调函数都会被调用
+// promise.then(res => {
+//   console.log("res1:", res)
+// })
+
+// promise.then(res => {
+//   console.log("res2:", res)
+// })
+
+// promise.then(res => {
+//   console.log("res3:", res)
+// })
+
+// 2.then方法传入的 "回调函数: 可以有返回值
+// then方法本身也是有返回值的, 它的返回值是Promise
+
+// 1> 如果我们返回的是一个普通值(数值/字符串/普通对象/undefined), 那么这个普通的值被作为一个新的Promise的resolve值
+// promise.then(res => {
+//   return "aaaaaa"
+// }).then(res => {
+//   console.log("res:", res)
+//   return "bbbbbb"
+// })
+
+// 2> 如果我们返回的是一个Promise
+// promise.then(res => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(111111)
+//     }, 3000)
+//   })
+// }).then(res => {
+//   console.log("res:", res)
+// })
+
+// 3> 如果返回的是一个对象, 并且该对象实现了thenable
+promise
+  .then((res) => {
+    return {
+      then: function (resolve, reject) {
+        resolve(222222);
+      },
+    };
+  })
+  .then((res) => {
+    console.log("res:", res);
+  });
+```
+
+## Promise.catch() 方法
+
+```js
+// const promise = new Promise((resolve, reject) => {
+//   resolve()
+//   // reject("rejected status")
+//   // throw new Error("rejected status")
+// })
+
+// 1.当executor抛出异常时, 也是会调用错误(拒绝)捕获的回调函数的
+// promise.then(undefined, err => {
+//   console.log("err:", err)
+//   console.log("----------")
+// })
+
+// 2.通过catch方法来传入错误(拒绝)捕获的回调函数
+// promise/a+规范
+// promise.catch(err => {
+//   console.log("err:", err)
+// })
+// promise.then(res => {
+//   // return new Promise((resolve, reject) => {
+//   //   reject("then rejected status")
+//   // })
+//   throw new Error("error message")
+// }).catch(err => {
+//   console.log("err:", err)
+// })
+
+// 3.拒绝捕获的问题(前面课程)
+// promise.then(res => {
+
+// }, err => {
+//   console.log("err:", err)
+// })
+// const promise = new Promise((resolve, reject) => {
+//   reject("111111")
+//   // resolve()
+// })
+
+// promise.then(res => {
+// }).then(res => {
+//   throw new Error("then error message")
+// }).catch(err => {
+//   console.log("err:", err)
+// })
+
+// promise.catch(err => {
+
+// })
+
+// 4.catch方法的返回值
+const promise = new Promise((resolve, reject) => {
+  reject("111111");
+});
+
+promise
+  .then((res) => {
+    console.log("res:", res);
+  })
+  .catch((err) => {
+    console.log("err:", err);
+    return "catch return value";
+  })
+  .then((res) => {
+    console.log("res result:", res);
+  })
+  .catch((err) => {
+    console.log("err result:", err);
+  });
+```
+
+## Promise.finally() 方法
+
+```js
+const promise = new Promise((resolve, reject) => {
+  // resolve("resolve message")
+  reject("reject message");
+});
+
+promise
+  .then((res) => {
+    console.log("res:", res);
+  })
+  .catch((err) => {
+    console.log("err:", err);
+  })
+  .finally(() => {
+    console.log("finally code execute");
+  });
+```
+
+## Promise 类方法 resolve
+
+```js
+const p = Promise.resolve({ name: "why" });
+// 相当于
+// new Promise(resolve => {
+//   resolve({name: 'why'})
+// })
+p.then((res) => {
+  console.log(res);
+});
+
+// 2.传入Promise
+const promise = Promise.resolve(
+  new Promise((resolve, reject) => {
+    resolve("11111");
+  })
+);
+
+promise.then((res) => {
+  console.log("res:", res);
+});
+
+// 3.传入thenable对象
+```
+
+## Promise 类方法 reject
+
+```js
+// const promise = Promise.reject("rejected message")
+// 相当于
+// const promise2 = new Promsie((resolve, reject) => {
+//   reject("rejected message")
+// })
+
+// 注意: 无论传入什么值都是一样的
+const promise = Promise.reject(new Promise(() => {}));
+
+promise
+  .then((res) => {
+    console.log("res:", res);
+  })
+  .catch((err) => {
+    console.log("err:", err);
+  });
+```
+
+## Promise 类方法 all
+
+```js
+// 创建多个Promise
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(11111);
+  }, 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(22222);
+  }, 2000);
+});
+
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(33333);
+  }, 3000);
+});
+
+// 需求: 所有的Promise都变成fulfilled时, 再拿到结果
+// 意外: 在拿到所有结果之前, 有一个promise变成了rejected, 那么整个promise是rejected
+Promise.all([p2, p1, p3, "aaaa"])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log("err:", err);
+  });
+```
+
+## Promise 类方法 allSetted
+
+```js
+// 创建多个Promise
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(11111);
+  }, 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(22222);
+  }, 2000);
+});
+
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(33333);
+  }, 3000);
+});
+
+// allSettled
+Promise.allSettled([p1, p2, p3])
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+## Promise 类方法 race
+
+```js
+// 创建多个Promise
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(11111);
+  }, 3000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(22222);
+  }, 500);
+});
+
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(33333);
+  }, 1000);
+});
+
+// race: 竞技/竞赛
+// 只要有一个Promise变成fulfilled或者rejected状态, 那么就结束
+// 意外:
+Promise.race([p1, p2, p3])
+  .then((res) => {
+    console.log("res:", res);
+  })
+  .catch((err) => {
+    console.log("err:", err);
+  });
+```
+
+## Promise 类方法 any
+
+```js
+// 创建多个Promise
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    // resolve(11111)
+    resolve(1111);
+  }, 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(22222);
+  }, 500);
+});
+
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    // resolve(33333)
+    reject(3333);
+  }, 3000);
+});
+
+// any方法
+// 只要有一个变为fulfilled 就结束
+Promise.any([p1, p2, p3])
+  .then((res) => {
+    console.log("res:", res);
+  })
+  .catch((err) => {
+    console.log("err:", err.errors);
+  });
+```
+
+## 实现一个 Promise 类
+
+```js
+const PROMISE_STATUS_PENDING = "pending";
+const PROMISE_STATUS_FULFILLED = "fulfilled";
+const PROMISE_STATUS_REJECTED = "rejected";
+
+function execFunctionWithCatchError(exactFn, value, resolve, reject) {
+  try {
+    resolve(exactFn(value));
+  } catch (error) {
+    reject(error);
+  }
+}
+
+class HYPromise {
+  constructor(executor) {
+    this.status = PROMISE_STATUS_PENDING;
+    this.value = null;
+    this.reason = null;
+    this.onFulfilledFns = [];
+    this.onRejectedFns = [];
+
+    const resolve = (value) => {
+      if (this.status === PROMISE_STATUS_PENDING) {
+        queueMicrotask(() => {
+          if (this.status != PROMISE_STATUS_PENDING) return;
+          this.status = PROMISE_STATUS_FULFILLED;
+          this.value = value;
+          this.onFulfilledFns.forEach((fn) => {
+            fn(this.value);
+          });
+        });
+      }
+    };
+    const reject = (reason) => {
+      if (this.status === PROMISE_STATUS_PENDING) {
+        queueMicrotask(() => {
+          if (this.status != PROMISE_STATUS_PENDING) return;
+          this.status = PROMISE_STATUS_REJECTED;
+          this.reason = reason;
+          // this.onRejected(this.reason);
+          this.onRejectedFns.forEach((fn) => {
+            fn(this.reason);
+          });
+        });
+      }
+    };
+
+    try {
+      executor(resolve, reject);
+    } catch (err) {
+      reject(err);
+    }
+  }
+  then(onFulfilled, onRejected) {
+    const defaultOnRejected = (err) => {
+      throw err;
+    };
+    onRejected = onRejected || defaultOnRejected;
+
+    const defaultOnFulfilled = (value) => {
+      return value;
+    };
+    onFulfilled = onFulfilled || defaultOnFulfilled;
+
+    return new HYPromise((resolve, reject) => {
+      // 处理延迟加载函数
+      if (this.status === PROMISE_STATUS_FULFILLED && onFulfilled) {
+        // try {
+        //   resolve(onFulfilled(this.value));
+        // } catch (error) {
+        //   reject(error);
+        // }
+        execFunctionWithCatchError(onFulfilled, this.value, resolve, reject);
+      }
+      if (this.status === PROMISE_STATUS_REJECTED && onRejected) {
+        // try {
+        //   resolve(onRejected(this.reason));
+        // } catch (error) {
+        //   reject(error);
+        // }
+        execFunctionWithCatchError(onRejected, this.reason, resolve, reject);
+      }
+      if (this.status == PROMISE_STATUS_PENDING) {
+        if (onFulfilled)
+          this.onFulfilledFns.push(() => {
+            execFunctionWithCatchError(
+              onFulfilled,
+              this.value,
+              resolve,
+              reject
+            );
+          });
+        if (onRejected)
+          this.onRejectedFns.push(() => {
+            execFunctionWithCatchError(
+              onRejected,
+              this.reason,
+              resolve,
+              reject
+            );
+          });
+      }
+    });
+  }
+
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
+  }
+
+  finally(onFinally) {
+    this.then(
+      () => {
+        onFinally();
+      },
+      () => {
+        onFinally();
+      }
+    );
+  }
+
+  static resolve(value) {
+    return new HYPromise((resolve) => resolve(value));
+  }
+
+  static reject(reason) {
+    return new Promise((resolve, reject) => reject(reason));
+  }
+
+  static all(promises) {
+    return new HYPromise((resolve, reject) => {
+      let values = [];
+      promises.forEach((promise) => {
+        promise.then(
+          (res) => {
+            values.push(res);
+            if (values.length === promises.length) resolve(values);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+      });
+    });
+  }
+
+  static allSettled(promises) {
+    return new HYPromise((resolve, reject) => {
+      let values = [];
+      promises.forEach((promise) => {
+        promise.then(
+          (res) => {
+            values.push({
+              status: PROMISE_STATUS_FULFILLED,
+              value: res,
+            });
+            if (values.length === promises.length) resolve(values);
+          },
+          (err) => {
+            values.push({
+              status: PROMISE_STATUS_REJECTED,
+              value: err,
+            });
+            if (values.length === promises.length) resolve(values);
+          }
+        );
+      });
+    });
+  }
+
+  static race(promises) {
+    return new Promise((resolve, reject) => {
+      promises.forEach((promise) => {
+        promise.then(resolve, reject);
+      });
+    });
+  }
+
+  static any(promises) {
+    return new Promise((resolve, reject) => {
+      let values = [];
+      promises.forEach((promise) => {
+        promise.then(resolve, (err) => {
+          values.push(err);
+          if (values.length === promises.length) {
+            // AggregateError node环境不支持
+            reject(new AggregateError(values));
+          }
+        });
+      });
+    });
+  }
+}
+```
+
+## JSON
+
+```js
+const obj = {
+  name: "why",
+  age: 19,
+  arr: [1, 2, 3],
+  friends: {
+    name: "ss",
+  },
+  // 函数会转换失败
+  foo: function () {
+    console.log(1);
+  },
+  toJSON: function () {
+    return "123456";
+  },
+};
+
+const newObj1 = JSON.stringify(obj);
+console.log(newObj1);
+
+// stringify第二个参数replacer
+// 传入数组 设置哪些需要转换
+const newObj2 = JSON.stringify(obj, ["name", "arr"]);
+console.log(newObj2);
+
+// 传入回调函数
+// 对一些数据做特殊处理
+const newObj3 = JSON.stringify(obj, (key, value) => {
+  if (key === "age") {
+    return value + 11;
+  }
+  return value;
+});
+console.log(newObj3);
+
+// stringify第三参数 space
+const newObj4 = JSON.stringify(obj, null, "-----");
+console.log(newObj4);
+// {
+//   -----"name": "why",
+//   -----"age": 19,
+//   -----"arr": [
+//   ----------1,
+//   ----------2,
+//   ----------3
+//   -----],
+//   -----"friends": {
+//   ----------"name": "ss"
+//   -----}
+//   }
+
+// 4.如果obj对象中有toJSON方法
+// 会调用这个方法获取返回值
+const newObj5 = JSON.stringify(obj);
+console.log(newObj5);
+// "123456"
+// "123456"
+// "123456"
+// "123456"
+// "123456"
+
+const JSONString =
+  '{"name":"why","age":19,"friends":{"name":"kobe"},"hobbies":["篮球","足球"]}';
+
+// 第二个参数传入回调函数
+const info = JSON.parse(JSONString, (key, value) => {
+  if (key === "age") {
+    return value - 1;
+  }
+  return value;
+});
+console.log(info);
+```
+
+## localStorage
+
+```js
+// 1.setItem
+localStorage.setItem("name", "coderwhy");
+localStorage.setItem("age", 18);
+
+// 2.length
+console.log(localStorage.length);
+for (let i = 0; i < localStorage.length; i++) {
+  const key = localStorage.key(i);
+  console.log(localStorage.getItem(key));
+}
+
+// 3.key方法
+console.log(localStorage.key(0));
+
+// 4.getItem(key)
+console.log(localStorage.getItem("age"));
+
+// 5.removeItem
+localStorage.removeItem("age");
+
+// 6.clear方法
+localStorage.clear();
+```
+
+## storage 工具类的封装
+
+```js
+class HYCache {
+  constructor(isLocal = true) {
+    this.storage = isLocal ? localStorage : sessionStorage;
+  }
+
+  setItem(key, value) {
+    if (value) {
+      this.storage.setItem(key, JSON.stringify(value));
+    }
+  }
+
+  getItem(key) {
+    let value = this.storage.getItem(key);
+    if (value) {
+      value = JSON.parse(value);
+      return value;
+    }
+  }
+
+  removeItem(key) {
+    this.storage.removeItem(key);
+  }
+
+  clear() {
+    this.storage.clear();
+  }
+
+  key(index) {
+    return this.storage.key(index);
+  }
+
+  length() {
+    return this.storage.length;
+  }
+}
+
+const localCache = new HYCache();
+const sessionCache = new HYCache(false);
+
+export { localCache, sessionCache };
+```
+
+## indexedDB 数据库的使用
+
+```js
+// 打开数据(和数据库建立连接)
+const dbRequest = indexedDB.open("why", 3);
+dbRequest.onerror = function (err) {
+  console.log("打开数据库失败~");
+};
+let db = null;
+dbRequest.onsuccess = function (event) {
+  db = event.target.result;
+};
+// 第一次打开/或者版本发生升级
+dbRequest.onupgradeneeded = function (event) {
+  const db = event.target.result;
+
+  console.log(db);
+
+  // 创建一些存储对象
+  db.createObjectStore("users", { keyPath: "id" });
+};
+
+class User {
+  constructor(id, name, age) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const users = [
+  new User(100, "why", 18),
+  new User(101, "kobe", 40),
+  new User(102, "james", 30),
+];
+
+// 获取btns, 监听点击
+const btns = document.querySelectorAll("button");
+for (let i = 0; i < btns.length; i++) {
+  btns[i].onclick = function () {
+    const transaction = db.transaction("users", "readwrite");
+    console.log(transaction);
+    const store = transaction.objectStore("users");
+
+    switch (i) {
+      case 0:
+        console.log("点击了新增");
+        for (const user of users) {
+          const request = store.add(user);
+          request.onsuccess = function () {
+            console.log(`${user.name}插入成功`);
+          };
+        }
+        transaction.oncomplete = function () {
+          console.log("添加操作全部完成");
+        };
+        break;
+      case 1:
+        console.log("点击了查询");
+
+        // 1.查询方式一(知道主键, 根据主键查询)
+        // const request = store.get(102)
+        // request.onsuccess = function(event) {
+        //   console.log(event.target.result)
+        // }
+
+        // 2.查询方式二:
+        const request = store.openCursor();
+        request.onsuccess = function (event) {
+          const cursor = event.target.result;
+          if (cursor) {
+            if (cursor.key === 101) {
+              console.log(cursor.key, cursor.value);
+            } else {
+              cursor.continue();
+            }
+          } else {
+            console.log("查询完成");
+          }
+        };
+        break;
+      case 2:
+        console.log("点击了删除");
+        const deleteRequest = store.openCursor();
+        deleteRequest.onsuccess = function (event) {
+          const cursor = event.target.result;
+          if (cursor) {
+            if (cursor.key === 101) {
+              cursor.delete();
+            } else {
+              cursor.continue();
+            }
+          } else {
+            console.log("查询完成");
+          }
+        };
+        break;
+      case 3:
+        console.log("点击了修改");
+        const updateRequest = store.openCursor();
+        updateRequest.onsuccess = function (event) {
+          const cursor = event.target.result;
+          if (cursor) {
+            if (cursor.key === 101) {
+              const value = cursor.value;
+              value.name = "curry";
+              cursor.update(value);
+            } else {
+              cursor.continue();
+            }
+          } else {
+            console.log("查询完成");
+          }
+        };
+        break;
+    }
+  };
+}
+```
+
+## window 常见属性和方法
+
+```js
+// 1.常见的属性
+// console.log(window.screenX)
+// console.log(window.screenY)
+
+// window.addEventListener("scroll", () => {
+//   console.log(window.scrollX, window.scrollY)
+// })
+
+// console.log(window.outerHeight)
+// console.log(window.innerHeight)
+
+// 2.常见的方法
+// const scrollBtn = document.querySelector("#scroll")
+// scrollBtn.onclick = function() {
+//   // 1.scrollTo
+//   // window.scrollTo({ top: 2000 })
+
+//   // 2.close
+//   // window.close()
+
+//   // 3.open
+//   window.open("http://www.baidu.com", "_self")
+// }
+
+// 3.常见的事件
+window.onload = function () {
+  console.log("window窗口加载完毕~");
+};
+
+window.onfocus = function () {
+  console.log("window窗口获取焦点~");
+};
+
+window.onblur = function () {
+  console.log("window窗口失去焦点~");
+};
+
+const hashChangeBtn = document.querySelector("#hashchange");
+hashChangeBtn.onclick = function () {
+  location.hash = "aaaa";
+};
+window.onhashchange = function () {
+  console.log("hash发生了改变");
+};
+
+// window继承EventTarget类
+
+// const clickHandler = () => {
+//   console.log("window发生了点击")
+// }
+
+// window.addEventListener("click", clickHandler)
+// window.removeEventListener("click", clickHandler)
+
+window.addEventListener("coderwhy", () => {
+  console.log("监听到了coderwhy事件");
+});
+
+window.dispatchEvent(new Event("coderwhy"));
+```
+
+## location 属性和方法
+
+```js
+console.log(window.location);
+
+// 当前的完整的url地址
+console.log(location.href);
+
+// 协议protocol
+console.log(location.protocol);
+
+// 几个方法
+// location.assign("http://www.baidu.com")
+// location.href = "http://www.baidu.com"
+
+// location.replace("http://www.baidu.com")
+// location.reload(false)
+```
+
+## history 属性和方法
+
+```js
+const jumpBtn = document.querySelector("#jump");
+
+jumpBtn.onclick = function () {
+  // location.href = "./demo.html"
+
+  // 跳转(不刷新网页)
+  history.pushState({ name: "coderwhy" }, "", "/detail");
+  // history.replaceState({name: "coderwhy"}, "", "/detail")
+};
+```
+
+## 路由跳转原理 hash
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="#/home">首页</a>
+      <a href="#/about">关于</a>
+
+      <div class="router-view"></div>
+    </div>
+
+    <script>
+      // 获取router-view的DOM
+      const routerViewEl = document.getElementsByClassName("router-view")[0];
+
+      // 监听URL的改变
+      window.addEventListener("hashchange", () => {
+        switch (location.hash) {
+          case "#/home":
+            routerViewEl.innerHTML = "首页";
+            break;
+          case "#/about":
+            routerViewEl.innerHTML = "关于";
+            break;
+          default:
+            routerViewEl.innerHTML = "";
+        }
+      });
+    </script>
+  </body>
+</html>
+```
+
+## 路由跳转原理 history
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="/home">首页</a>
+      <a href="/about">关于</a>
+
+      <div class="router-view"></div>
+    </div>
+
+    <script>
+      // 1.获取router-view的DOM
+      const routerViewEl = document.getElementsByClassName("router-view")[0];
+
+      // 获取所有的a元素, 自己来监听a元素的改变
+      const aEls = document.getElementsByTagName("a");
+      for (let el of aEls) {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = el.getAttribute("href");
+          history.pushState({}, "", href);
+          urlChange();
+        });
+      }
+
+      // 执行返回操作时, 依然来到urlChange
+      window.addEventListener("popstate", urlChange);
+
+      // 监听URL的改变
+      function urlChange() {
+        switch (location.pathname) {
+          case "/home":
+            routerViewEl.innerHTML = "首页";
+            break;
+          case "/about":
+            routerViewEl.innerHTML = "关于";
+            break;
+          default:
+            routerViewEl.innerHTML = "";
+        }
+      }
+    </script>
+  </body>
+</html>
+```
+
+## 防抖函数
+
+```js
+function debounce(fn, delay, immediate = false) {
+  let timer = null;
+  let isInvoke = false;
+  const _debounce = function (...args) {
+    return new Promise((resolve, reject) => {
+      try {
+        if (timer) {
+          clearTimeout(timer);
+        }
+        if (immediate && !isInvoke) {
+          console.log(args);
+          const result = fn.apply(this, args);
+          isInvoke = true;
+          resolve(result);
+        } else {
+          timer = setTimeout(() => {
+            console.log(args);
+            const result = fn.apply(this, args);
+            isInvoke = false;
+            resolve(result);
+          }, delay);
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    });
+  };
+
+  _debounce.cancel = function () {
+    if (timer) clearTimeout(timer);
+  };
+
+  return _debounce;
+}
+```
+
+## 节流函数
+
+```js
+function throttle(fn, interval, options = { leading: true, trailing: true }) {
+  const { leading, trailing } = options;
+  let startTime = 0;
+  let timer = null;
+  const _throttle = function (...args) {
+    return new Promise((resolve, reject) => {
+      try {
+        let nowTime = new Date().getTime();
+        if (!startTime && !leading) startTime = nowTime;
+
+        const remainTime = interval - (nowTime - startTime);
+        if (remainTime <= 0) {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          let res = fn.apply(this, args);
+          resolve(res);
+          startTime = nowTime;
+          return;
+        }
+        if (trailing && !timer) {
+          timer = setTimeout(() => {
+            timer = null;
+            let res = fn.apply(this, args);
+            resolve(res);
+            startTime = !leading ? 0 : new Date().getTime();
+          }, remainTime);
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    });
+  };
+
+  _throttle.cancel = function () {
+    if (timer) clearTimeout(timer);
+    timer = null;
+    lastTime = 0;
+  };
+
+  return _throttle;
+}
+```
+
+## 深拷贝函数
+
+```js
+const { map } = require("lodash");
+
+const s1 = Symbol("a");
+const s2 = Symbol("b");
+
+const obj = {
+  name: "why",
+  age: 19,
+  friend: {
+    name: "kobe",
+    adress: {
+      city: "北京",
+    },
+  },
+  hobbies: ["abc", "cba", "nba"],
+  s1: s1,
+  [s2]: "abc",
+  foo() {
+    console.log(111);
+  },
+  set: new Set(["aaa", "bbb", "ccc"]),
+  map: new Map([
+    ["aaa", "abc"],
+    ["bbb", "cba"],
+  ]),
+};
+
+obj.info = obj;
+
+function isObject(obj) {
+  const valueType = typeof obj;
+  return obj !== null && (valueType === "object" || valueType === "function");
+}
+
+function deepClone(originValue, map = new WeakMap()) {
+  // Set数据结构
+  if (originValue instanceof Set) {
+    return new Set([...originValue]);
+  }
+
+  // Map数据结构
+  if (originValue instanceof Map) {
+    return new Map([...originValue]);
+  }
+
+  // Symbol数据类型
+  if (typeof originValue === "symbol") {
+    return Symbol(originValue.description);
+  }
+
+  // 函数
+  if (typeof originValue == "function") {
+    return originValue;
+  }
+
+  if (!isObject(originValue)) {
+    return originValue;
+  }
+
+  if (map.has(originValue)) {
+    return map.get(originValue);
+  }
+  // 判断传入是数组还是对象
+  const newObj = Array.isArray(originValue) ? [] : {};
+  map.set(originValue, newObj);
+  for (const key in originValue) {
+    newObj[key] = deepClone(originValue[key], map);
+  }
+  const symbolKeys = Object.getOwnPropertySymbols(originValue);
+  for (const key of symbolKeys) {
+    newObj[key] = deepClone(originValue[key], map);
+  }
+  return newObj;
+}
+
+console.log(deepClone(obj));
+```
+
+## 自定义数据总线
+
+```js
+class HYEventBus {
+  constructor() {
+    this.eventBus = {};
+  }
+  on(eventName, eventCallBack, thisArg) {
+    let handlers = this.eventBus[eventName];
+    if (!handlers) {
+      handlers = [];
+      this.eventBus[eventName] = handlers;
+    }
+    handlers.push({
+      eventCallBack,
+      thisArg,
+    });
+  }
+  off(eventName, eventCallBack) {
+    let handlers = this.eventBus[eventName];
+    if (!handlers) return;
+    const newHandlers = [...handlers];
+    for (let i = 0; i < newHandlers.length; i++) {
+      const handler = newHandlers[i];
+      if (handler.eventCallBack === eventCallBack) {
+        const index = handlers.indexOf(handler);
+        handlers.splice(index, 1);
+      }
+    }
+  }
+
+  emit(eventName, ...payload) {
+    let handlers = this.eventBus[eventName];
+    if (!handlers) return;
+    handlers.forEach((item) => {
+      item.eventCallBack.apply(item.thisArg, payload);
+    });
+  }
+}
+```
+
+## call 函数的实现
+
+```js
+Function.prototype.myCall = function (thisArg, ...args) {
+  const fn = this;
+
+  // 对thisArg转成对象类型(防止它传入的是非对象类型)
+  thisArg =
+    thisArg !== null && thisArg !== undefined ? Object(thisArg) : window;
+
+  thisArg.fn = fn;
+  let res = thisArg.fn(...args);
+  delete thisArg.fn;
+  return res;
+};
+
+function foo(...args) {
+  console.log(args);
+  console.log(this);
+}
+
+foo.myCall({ name: "kobe" }, "abc", "bcd");
+```
+
+## apply 函数的实现
+
+```js
+Function.prototype.myApply = function (thisArg, argArray) {
+  // 1.获取到要执行的函数
+  var fn = this;
+
+  // 2.处理绑定的thisArg
+  thisArg =
+    thisArg !== null && thisArg !== undefined ? Object(thisArg) : window;
+
+  thisArg.fn = fn;
+  argArray = argArray || [];
+  let res = thisArg.fn(...argArray);
+  delete thisArg.fn;
+  return res;
+};
+
+function foo(...args) {
+  console.log(args);
+  console.log(this);
+}
+
+foo.myApply({ name: "kobe" }, [1, 2, 3]);
+```
+
+## bind 函数的实现
+
+```js
+
+```
