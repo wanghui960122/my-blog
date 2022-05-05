@@ -26,6 +26,7 @@ module.exports = {
     nav: [
       // {text: '我的个人网站', link: 'https://www.cooldream.fun/home' },
       { text: "面试", link: "/Interview/Experience/" },
+      { text: "工具函数", link: "/ToolMD/Utils/" },
       { text: "Github", link: "https://github.com/wanghui960122/my-blog" },
     ],
     sidebar: {
@@ -41,9 +42,20 @@ module.exports = {
         {
           text: "Experience",
           children: [
-            { text: "基础", link: "/Interview/Experience/" },
-            { text: "进阶", link: "/Interview/Experience/advanced" },
+            { text: "JS", link: "/Interview/Experience/" },
+            { text: "TS", link: "/Interview/Experience/advanced" },
+            { text: "Node", link: "/Interview/Experience/node" },
+            { text: "Webpack", link: "/Interview/Experience/webpack" },
+            { text: "React", link: "/Interview/Experience/react" },
+            { text: "Vue3", link: "/Interview/Experience/vue3" },
           ],
+          sidebarDepth: 3,
+        },
+      ],
+      "/ToolMD": [
+        {
+          text: "Utils",
+          children: [{ text: "工具函数", link: "/ToolMD/Utils/" }],
           sidebarDepth: 3,
         },
       ],
