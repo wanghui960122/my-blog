@@ -4,6 +4,290 @@ title JS
 
 # 面经
 
+## 数组方法 Array.of()
+
+```js
+// 没有参数的时候，返回一个空数组
+
+Array.of(1); // [1]
+Array.of("a"); // ['a']
+Array.of(1, 2); // [1, 2]
+```
+
+## 数组方法 copyWithin
+
+```js
+// 将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组
+
+// 参数如下：
+
+// target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+// start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示从末尾开始计算。
+// end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示从末尾开始计算。
+
+[1, 2, 3, 4, 5]
+  .copyWithin(0, 2, 3) // [3, 2, 3, 4, 5]
+
+  [(1, 2, 3, 4, 5)].copyWithin(0, 2); // [3, 4, 5, 4, 5]
+```
+
+## 数组方法 fill()
+
+```js
+// 使用给定值，填充一个数组
+[1, 2, 3].fill(7); // [7,7,7]
+
+// 还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置
+[1, 2, 3, 4, 5].fill(7, 2, 4); // [1,2,7,7,5]
+```
+
+## 数组方法 entries()，keys()，values()
+
+```js
+// keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历
+
+for (let index of ["a", "b"].keys()) {
+  console.log(index);
+}
+// 0
+// 1
+
+for (let elem of ["a", "b"].values()) {
+  console.log(elem);
+}
+// 'a'
+// 'b'
+
+for (let [index, elem] of ["a", "b"].entries()) {
+  console.log(index, elem);
+}
+// 0 "a"
+// 1 "b"
+```
+
+## super 关键字
+
+```js
+// this关键字总是指向函数所在的当前对象，ES6 又新增了另一个类似的关键字super，指向当前对象的原型对象
+const proto = {
+  foo: "hello",
+};
+
+const obj = {
+  foo: "world",
+  find() {
+    return super.foo;
+  },
+};
+
+Object.setPrototypeOf(obj, proto); // 为obj设置原型对象
+obj.find(); // "hello"
+```
+
+## Object.is()
+
+```js
+// 严格判断两个值是否相等，与严格比较运算符（===）的行为基本一致，不同之处只有两个：一是+0不等于-0，二是NaN等于自身
++0 === -0; //true
+NaN === NaN; // false
+
+Object.is(+0, -0); // false
+Object.is(NaN, NaN); // true
+```
+
+## 函数的 length 属性
+
+```js
+// length将返回没有指定默认值的参数个数
+
+var fn1 = function (a) {};
+fn1.length; // 1
+
+var fn2 = function (a = 5) {};
+fn2.length; // 0
+
+var fn3 = function (a, b, c = 5) {};
+fn3.length; // 2
+
+// rest 参数也不会计入length属性
+(function (...args) {}.length); // 0
+
+// 如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数了
+var fn4 = function (a = 0, b, c) {};
+fn4.length; // 0
+var fn5 = function (a, b = 1, c) {};
+fn5.length; // 1
+```
+
+## 作用域
+
+```js
+// 一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域
+
+// 等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的
+
+// 下面例子中，y=x会形成一个单独作用域，x没有被定义，所以指向全局变量x
+
+let x = 1;
+
+function f(y = x) {
+  // 等同于 let y = x
+  let x = 2;
+  console.log(y);
+}
+
+f(); // 1
+```
+
+## Decorator 装饰器
+
+```js
+// Decorator，即装饰器，从名字上很容易让我们联想到装饰者模式
+
+// 简单来讲，装饰者模式就是一种在不改变原类和使用继承的情况下，动态地扩展对象功能的设计理论。
+
+// ES6中Decorator功能亦如此，其本质也不是什么高大上的结构，就是一个普通的函数，用于扩展类属性和类方法
+
+// 这里定义一个士兵，这时候他什么装备都没有
+
+class soldier {}
+
+// 定义一个得到 AK 装备的函数，即装饰器
+
+function strong(target) {
+  target.AK = true;
+}
+
+// 使用该装饰器对士兵进行增强
+
+// @strong
+class soldier {}
+
+// 这时候士兵就有武器了
+
+soldier.AK; // true
+
+// 上述代码虽然简单，但也能够清晰看到了使用Decorator两大优点：
+
+// 代码可读性变强了，装饰器命名相当于一个注释
+// 在不改变原有代码情况下，对原来功能进行扩展
+```
+
+## 尾递归
+
+```js
+// 普通递归
+// 在return执行，再次调用函数，多次入栈，容易造成栈溢出
+function factorial(n) {
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
+  // 相当于
+  // let r = factorial(n - 1)
+  // return n * r
+}
+
+factorial(5); // 120
+
+// 尾递归
+// 每次返回函数执行结果，说明将上一次函数踢出栈，重新入栈
+function factorial(n, total) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5, 1); //120
+```
+
+## 大文件上传如何做断点续传？
+
+```js
+// 分片上传
+// 断点续传
+```
+
+## 下拉刷新 && 上拉加载
+
+```js
+// 上拉加载
+// 可滚动的页面具有scrollHeight属性，
+// scrollTop 滚动的高度
+// clientHeight 屏幕可视区域高度
+let clientHeight = document.documentElement.clientHeight; //浏览器高度
+let scrollHeight = document.body.scrollHeight;
+let scrollTop = document.documentElement.scrollTop;
+
+let distance = 50; //距离视窗还用50的时候，开始触发；
+
+if (scrollTop + clientHeight >= scrollHeight - distance) {
+  console.log("开始加载数据");
+}
+
+// 下拉刷新
+// 监听原生touchstart事件，记录其初始位置的值，e.touches[0].pageY；
+// 监听原生touchmove事件，记录并计算当前滑动的位置值与初始位置值的差值，大于0表示向下拉动，并借助CSS3的translateY属性使元素跟随手势向下滑动对应的差值，同时也应设置一个允许滑动的最大值；
+// 监听原生touchend事件，若此时元素滑动达到最大值，则触发callback，同时将translateY重设为0，元素回到初始位置
+
+// html结构
+<main>
+  <p class="refreshText"></p>
+  <ul id="refreshContainer">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+    <li>555</li>
+    ...
+  </ul>
+</main>;
+
+// 监听touchstart事件，记录初始的值
+var _element = document.getElementById("refreshContainer"),
+  _refreshText = document.querySelector(".refreshText"),
+  _startPos = 0, // 初始的值
+  _transitionHeight = 0; // 移动的距离
+
+_element.addEventListener(
+  "touchstart",
+  function (e) {
+    _startPos = e.touches[0].pageY; // 记录初始位置
+    _element.style.position = "relative";
+    _element.style.transition = "transform 0s";
+  },
+  false
+);
+
+// 监听touchmove移动事件，记录滑动差值
+_element.addEventListener(
+  "touchmove",
+  function (e) {
+    // e.touches[0].pageY 当前位置
+    _transitionHeight = e.touches[0].pageY - _startPos; // 记录差值
+
+    if (_transitionHeight > 0 && _transitionHeight < 60) {
+      _refreshText.innerText = "下拉刷新";
+      _element.style.transform = "translateY(" + _transitionHeight + "px)";
+
+      if (_transitionHeight > 55) {
+        _refreshText.innerText = "释放更新";
+      }
+    }
+  },
+  false
+);
+
+// 最后，就是监听touchend离开的事件
+_element.addEventListener(
+  "touchend",
+  function (e) {
+    _element.style.transition = "transform 0.5s ease 1s";
+    _element.style.transform = "translateY(0px)";
+    _refreshText.innerText = "更新中...";
+    // todo...
+  },
+  false
+);
+```
+
 ## 如何理解 html 语义化
 
 ```js
@@ -3570,4 +3854,146 @@ function foo() {
 
 let bar = foo.bind({ name: "kobe" });
 bar();
+```
+
+## 进程 线程
+
+```js
+进程：系统进行资源分配和调度的基本单位
+线程：操作系统能够进行运算调度的最小单位，其是进程中的一个执行任务（控制单元），负责当前进程中程序的执行
+```
+
+## 实现 instanceOf
+
+```js
+function myInstanceOf(target, origin) {
+  while (target) {
+    if (target.__proto__ === origin.protoType) return true;
+    target = target.__proto__;
+  }
+  return false;
+}
+console.log(myInstanceOf([], Array));
+```
+
+## 实现数组 map 方法
+
+```js
+Array.prototype.myMap = function (fn, thisValue) {
+  let newArr = [];
+  thisValue = thisValue || [];
+  let arr = this;
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(fn.call(thisValue, arr[i], i, arr));
+  }
+
+  return newArr;
+};
+
+console.log([1, 2, 3].map((item, index, arr) => item + 1));
+console.log([1, 2, 3].myMap((item, index, arr) => item + 1));
+```
+
+## 利用数组 reduce 方法实现 map 方法
+
+```js
+Array.prototype.myMap = function (fn, thisValue) {
+  let newArr = [];
+  thisValue = thisValue || [];
+  let arr = this;
+  arr.reduce((pre, val, index, target) => {
+    return newArr.push(fn.call(thisValue, val, index, target));
+  }, []);
+
+  return newArr;
+};
+
+console.log([1, 2, 3].map((item, index, arr) => item + 1));
+console.log([1, 2, 3].myMap((item, index, arr) => item + 1));
+```
+
+## 实现数组 reduce 方法
+
+```js
+Array.prototype.myReduce = function (fn, initialValue) {
+  var num = initialValue == undefined ? arr[0] : initialValue;
+  let arr = this;
+  for (let i = 0; i < arr.length; i++) {
+    num = fn(num, arr[i], i, arr);
+  }
+  return num;
+};
+
+console.log(
+  [1, 2, 3, 4].reduce((pre, val, index, arr) => {
+    pre.push(val + 1);
+    return pre;
+  }, [])
+);
+
+console.log(
+  [1, 2, 3, 4].myReduce((pre, val, index, arr) => {
+    pre.push(val + 1);
+    return pre;
+  }, [])
+);
+```
+
+## 实现数组 flat 方法
+
+```js
+Array.prototype.myFlat = function (num = 1) {
+  let arr = this;
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i]) && num) {
+      newArr = newArr.concat(arr[i].myFlat(num - 1));
+    } else {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+};
+
+console.log([1, 2, [3, 4, [5, 6]]].myFlat());
+```
+
+## 柯里化函数
+
+```js
+/**
+ * 将函数柯里化
+ * @param fn    待柯里化的原函数
+ * @param len   所需的参数个数，默认为原函数的形参个数
+ */
+function curry(fn,len = fn.length) {
+ return _curry.call(this,fn,len)
+}
+​
+/**
+ * 中转函数
+ * @param fn    待柯里化的原函数
+ * @param len   所需的参数个数
+ * @param args  已接收的参数列表
+ */
+function _curry(fn,len,...args) {
+    return function (...params) {
+         let _args = [...args,...params];
+         if(_args.length >= len){
+             return fn.apply(this,_args);
+         }else{
+          return _curry.call(this,fn,len,..._args)
+         }
+    }
+}
+// 我们来验证一下：
+
+  let _fn = curry(function(a,b,c,d,e){
+  console.log(a,b,c,d,e)
+  });
+  ​
+  _fn(1,2,3,4,5);     // print: 1,2,3,4,5
+  _fn(1)(2)(3,4,5);   // print: 1,2,3,4,5
+  _fn(1,2)(3,4)(5);   // print: 1,2,3,4,5
+  _fn(1)(2)(3)(4)(5); // print: 1,2,3,4,5
 ```

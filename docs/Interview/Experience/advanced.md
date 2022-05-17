@@ -278,6 +278,59 @@ printPoint({ x: 1, y: 1 });
 printPoint({ x: 1, y: 1, z: 1 });
 ```
 
+## 类型索引 keyof
+
+```ts
+// keyof 类似于 Object.keys ，用于获取一个接口中 Key 的联合类型。
+
+interface Button {
+  type: string;
+  text: string;
+}
+
+type ButtonKeys = keyof Button;
+// 等效于
+type ButtonKeys = "type" | "text";
+```
+
+## 映射类型
+
+```ts
+// 通过 in 关键字做类型的映射，遍历已有接口的 key 或者是遍历联合类型，如下例子：
+
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+interface Obj {
+  a: string;
+  b: string;
+}
+
+type ReadOnlyObj = Readonly<Obj>;
+
+// 述的结构，可以分成这些步骤：
+
+// keyof T：通过类型索引 keyof 的得到联合类型 'a' | 'b'
+// P in keyof T 等同于 p in 'a' | 'b'，相当于执行了一次 forEach 的逻辑，遍历 'a' | 'b'
+// 所以最终ReadOnlyObj的接口为下述：
+
+interface ReadOnlyObj {
+  readonly a: string;
+  readonly b: string;
+}
+```
+
+## 条件类型
+
+```ts
+// 条件类型的语法规则和三元表达式一致，经常用于一些类型不确定的情况。
+
+T extends U ? X : Y
+
+// 上面的意思就是，如果 T 是 U 的子集，就是类型 X，否则为类型 Y
+```
+
 ## 联合类型
 
 ```ts

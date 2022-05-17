@@ -48,6 +48,8 @@ module.exports = {
             { text: "Webpack", link: "/Interview/Experience/webpack" },
             { text: "React", link: "/Interview/Experience/react" },
             { text: "Vue3", link: "/Interview/Experience/vue3" },
+            { text: "Linux", link: "/Interview/Experience/linux" },
+            { text: "计算机网络", link: "/Interview/Experience/inter" },
           ],
           sidebarDepth: 3,
         },
@@ -55,7 +57,7 @@ module.exports = {
       "/ToolMD": [
         {
           text: "Utils",
-          children: [{ text: "工具函数", link: "/ToolMD/Utils/" }],
+          children: [{ text: "UtilsMethods", link: "/ToolMD/Utils/" }],
           sidebarDepth: 3,
         },
       ],

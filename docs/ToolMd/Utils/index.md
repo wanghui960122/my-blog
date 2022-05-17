@@ -1,5 +1,5 @@
 ---
-title 工具函数
+title UtilsMethods
 ---
 
 ## 前端批量下载并压缩文件
@@ -109,4 +109,27 @@ const { getPageList, getPageListCount } = useGetters("moduleName", [
   "getPageList",
   "getPageListCount",
 ]);
+```
+
+## 多维数组过滤
+
+```js
+var arr = [1, [2, [], [1, []]], [1, 2, 3], [7]];
+
+var query = [1, 2, 3, 4, 5];
+
+function filterFn(a, b) {
+  a = a.map((item) => {
+    if (Array.isArray(item)) {
+      item = filterFn(item, b);
+      return [item];
+    } else {
+      if (b.find((subItem) => subItem == item)) return [item];
+      return [];
+    }
+  });
+  return a.flat(1);
+}
+
+filterFn(arr, query);
 ```
