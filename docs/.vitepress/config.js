@@ -26,7 +26,7 @@ module.exports = {
     nav: [
       // {text: '我的个人网站', link: 'https://www.cooldream.fun/home' },
       { text: "面试", link: "/Interview/Experience/" },
-      { text: "工具函数", link: "/ToolMD/Utils/" },
+      { text: "工具函数", link: "/Tool/Utils/" },
       { text: "Github", link: "https://github.com/wanghui960122/my-blog" },
     ],
     sidebar: {
@@ -53,10 +53,10 @@ module.exports = {
           ],
         },
       ],
-      "/ToolMD": [
+      "/Tool": [
         {
           text: "Utils",
-          children: [{ text: "UtilsMethods", link: "/ToolMD/Utils/" }],
+          children: [{ text: "UtilsMethods", link: "/Tool/Utils/" }],
         },
       ],
     },
