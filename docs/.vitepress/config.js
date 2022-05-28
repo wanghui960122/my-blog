@@ -51,14 +51,12 @@ module.exports = {
             { text: "Linux", link: "/Interview/Experience/linux" },
             { text: "计算机网络", link: "/Interview/Experience/inter" },
           ],
-          sidebarDepth: 3,
         },
       ],
       "/ToolMD": [
         {
           text: "Utils",
           children: [{ text: "UtilsMethods", link: "/ToolMD/Utils/" }],
-          sidebarDepth: 3,
         },
       ],
     },
